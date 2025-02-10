@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du commentaire{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Commentaire : {{ commentaire.description }}</h1>
+    
+    <div class="form-group">
+        <p><strong>Description :</strong> {{ commentaire.description }}</p>
+    </div>
+
+    <div class="form-group">
+        {% if commentaire.image %}
+            <p><strong>Image :</strong></p>
+            <img src="{{ commentaire.image }}" alt="Image du commentaire" style="max-width: 100%; height: auto;">
+        {% else %}
+            <p><strong>Image :</strong> Pas d'image</p>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <a href="{{ path('commentaire_edit', {'id': commentaire.id}) }}" class="btn btn-warning">Modifier</a>
+        
+        <form method="post" action="{{ path('commentaire_delete', {'id': commentaire.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');" class="form-inline">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commentaire.id) }}">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+
+    <a href="{{ path('publication_show', {'id': commentaire.publication.id}) }}" class="btn btn-secondary mt-3">Retour à la publication</a>
+</div>
+{% endblock %}

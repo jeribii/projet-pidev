@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la réclamation{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="page-title">Modifier la réclamation</h1>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    <div class="form-group">
+        {{ form_label(form.titre) }}
+        {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+        <div class="error">{{ form_errors(form.titre) }}</div>
+    </div>
+
+    <div class="form-group mt-3">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        <div class="error">{{ form_errors(form.description) }}</div>
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-success">Enregistrer les modifications</button>
+    </div>
+
+    {{ form_end(form) }}
+
+    <a href="{{ path('reclamation_index') }}" class="btn btn-secondary mt-3">Retour à la liste des réclamations</a>
+</div>
+{% endblock %}
